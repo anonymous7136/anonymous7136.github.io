@@ -1,0 +1,212 @@
+<html>
+<head>
+  <meta charvctk_set="UTF-8">
+  <title>CompXGAN</title>
+</head>
+<h2>CompXGAN: Complex-Valued Neural Vocoder With iSTFT-Based Waveform Generation</h2>
+
+<h3>Anonymous</h3>
+
+
+<body>
+
+Recent advances in neural vocoders have significantly improved speech synthesis quality through generative models. 
+Among these, inverse short-time Fourier transform (iSTFT)-based approaches have gained attention for directly generating waveforms in the spectral domain without upsampling. 
+However, most iSTFT-based vocoders rely on real-valued networks that treat real and imaginary parts independently, limiting their ability to capture complex spectrogram structure. 
+We present CompXGAN, a vocoder that adopts complex-valued neural networks (CVNNs) in both the generator and discriminator to better model spectral correlations in the complex domain. 
+The generator jointly processes real and imaginary components, while the complex multi-resolution discriminator (cMRD) provides consistent spectral feedback using complex-valued inputs. 
+To support structured transformation in the phase domain, we introduce phase quantization, which discretizes phase values and regularizes learning. 
+We also propose a block-matrix computation scheme that improves training efficiency by reducing redundant graph operations. 
+Experiments demonstrate that CompXGAN outperforms real-valued baselines in synthesis quality. 
+Moreover, its block-matrix computation scheme reduces training time by 34%. Audio samples and code are available at <a href="https://anonymous7136.github.io/">https://anonymous7136.github.io/</a>.
+
+<p align="center"><img style="width:60%; height:auto;" src="assets/main.png" /></p>
+
+<div>
+  <h3 id="libri">LibriTTS</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Ground-Truth</th>
+      <th>HiFiGAN (V1)</th>
+      <th>iSTFTNet</th>
+      <th>BigVGAN (base)</th>
+      <th>Vocos</th>
+      <th>CompXGAN</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-clean_260_123288_260_123288_000012_000001.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-clean_260_123288_260_123288_000012_000001.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-clean_260_123288_260_123288_000012_000001.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-clean_260_123288_260_123288_000012_000001.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-clean_260_123288_260_123288_000012_000001.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-clean_260_123288_260_123288_000012_000001.wav" type="audio/wav"></audio></td>
+    </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-clean_2300_131720_2300_131720_000013_000002.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-clean_2300_131720_2300_131720_000013_000002.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-clean_2300_131720_2300_131720_000013_000002.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-clean_2300_131720_2300_131720_000013_000002.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-clean_2300_131720_2300_131720_000013_000002.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-clean_2300_131720_2300_131720_000013_000002.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-clean_5683_32866_5683_32866_000045_000006.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-clean_5683_32866_5683_32866_000045_000006.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-clean_5683_32866_5683_32866_000045_000006.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-clean_5683_32866_5683_32866_000045_000006.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-clean_5683_32866_5683_32866_000045_000006.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-clean_5683_32866_5683_32866_000045_000006.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-clean_7021_79740_7021_79740_000010_000003.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-clean_7021_79740_7021_79740_000010_000003.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-clean_7021_79740_7021_79740_000010_000003.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-clean_7021_79740_7021_79740_000010_000003.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-clean_7021_79740_7021_79740_000010_000003.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-clean_7021_79740_7021_79740_000010_000003.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-other_3528_168669_3528_168669_000045_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-other_3528_168669_3528_168669_000045_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-other_3528_168669_3528_168669_000045_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-other_3528_168669_3528_168669_000045_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-other_3528_168669_3528_168669_000045_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-other_3528_168669_3528_168669_000045_000000.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-other_7902_96594_7902_96594_000046_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-other_7902_96594_7902_96594_000046_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-other_7902_96594_7902_96594_000046_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-other_7902_96594_7902_96594_000046_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-other_7902_96594_7902_96594_000046_000000.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-other_7902_96594_7902_96594_000046_000000.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/LibriTTS_test-other_7975_280057_7975_280057_000014_000001.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/LibriTTS_test-other_7975_280057_7975_280057_000014_000001.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/LibriTTS_test-other_7975_280057_7975_280057_000014_000001.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/LibriTTS_test-other_7975_280057_7975_280057_000014_000001.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/LibriTTS_test-other_7975_280057_7975_280057_000014_000001.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/LibriTTS_test-other_7975_280057_7975_280057_000014_000001.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+</table>
+</div>
+
+
+<div>
+  <h3 id="ood_bass">Out-Of-Distrubution (MUSDB18-HQ) Bass</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Ground-Truth</th>
+      <th>HiFiGAN (V1)</th>
+      <th>iSTFTNet</th>
+      <th>BigVGAN (base)</th>
+      <th>Vocos</th>
+      <th>CompXGAN</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/ood_bass/gt/Al James - Schoolboy Facination_bass.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/ood_bass/hifigan/Al James - Schoolboy Facination_bass.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/ood_bass/istftnet/Al James - Schoolboy Facination_bass.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/ood_bass/bigvgan/Al James - Schoolboy Facination_bass.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/ood_bass/vocos/Al James - Schoolboy Facination_bass.wav" type="audio/wav"></audio></td>
+      <td><audio controls style="width: 225px; height: 50px"><source src="samples/ood_bass/compxgan/Al James - Schoolboy Facination_bass.wav" type="audio/wav"></audio></td>
+    </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/Carlos Gonzalez - A Place For Us_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/Carlos Gonzalez - A Place For Us_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/Carlos Gonzalez - A Place For Us_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/Carlos Gonzalez - A Place For Us_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/Carlos Gonzalez - A Place For Us_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/Carlos Gonzalez - A Place For Us_bass.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/Hollow Ground - Ill Fate_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/Hollow Ground - Ill Fate_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/Hollow Ground - Ill Fate_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/Hollow Ground - Ill Fate_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/Hollow Ground - Ill Fate_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/Hollow Ground - Ill Fate_bass.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/Mu - Too Bright_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/Mu - Too Bright_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/Mu - Too Bright_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/Mu - Too Bright_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/Mu - Too Bright_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/Mu - Too Bright_bass.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/PR - Oh No_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/PR - Oh No_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/PR - Oh No_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/PR - Oh No_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/PR - Oh No_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/PR - Oh No_bass.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/Secretariat - Over The Top_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/Secretariat - Over The Top_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/Secretariat - Over The Top_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/Secretariat - Over The Top_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/Secretariat - Over The Top_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/Secretariat - Over The Top_bass.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/gt/Speak Softly - Like Horses_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/hifigan/Speak Softly - Like Horses_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/istftnet/Speak Softly - Like Horses_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/bigvgan/Speak Softly - Like Horses_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/vocos/Speak Softly - Like Horses_bass.wav" type="audio/wav"></audio></td>
+        <td><audio controls style="width: 225px; height: 50px"><source src="samples/libri/compxgan/Speak Softly - Like Horses_bass.wav" type="audio/wav"></audio></td>
+      </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
